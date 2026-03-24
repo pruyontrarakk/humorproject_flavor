@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Text",
+    sans-serif;
+  background: #ffffff;
+  color: #111827;
+}
+
+.dark body {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.card {
+  @apply rounded-3xl border border-slate-200 bg-white/90 shadow-sm dark:border-slate-700 dark:bg-slate-950/90;
+}
+
+.pill {
+  @apply inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700 dark:border-brand-800 dark:bg-brand-900/40 dark:text-brand-200;
+}
+
+.stat-number {
+  @apply text-3xl font-semibold tracking-tight text-brand-900 dark:text-brand-100;
+}
+
+.stat-label {
+  @apply text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-md shadow-brand-600/30 transition hover:-translate-y-px hover:bg-brand-500 hover:shadow-brand-500/40 disabled:cursor-not-allowed disabled:opacity-60;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800;
+}
+
+.btn-ghost-sm {
+  @apply inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-700 transition hover:bg-slate-50 disabled:opacity-50 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800;
+}
+
+.btn-danger {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-md shadow-red-600/25 transition hover:bg-red-500 disabled:cursor-not-allowed disabled:opacity-60;
+}
+
+.btn-danger-sm {
+  @apply inline-flex items-center justify-center rounded-lg border border-red-200 bg-red-50 px-2.5 py-1.5 text-xs font-medium text-red-800 transition hover:bg-red-100 dark:border-red-900 dark:bg-red-950/50 dark:text-red-200 dark:hover:bg-red-950;
+}
+
+.input {
+  @apply w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner shadow-slate-100 outline-none ring-0 transition placeholder:text-slate-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-500/40 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:shadow-none dark:placeholder:text-slate-500 dark:focus:border-brand-500 dark:focus:ring-brand-500/30;
+}
+
+textarea.input {
+  @apply min-h-[80px] resize-y;
+}
+
+.section-title {
+  @apply text-sm font-semibold uppercase tracking-[0.18em] text-brand-700 dark:text-brand-400;
+}
+
+.prompt-pre {
+  @apply mt-1 max-h-44 overflow-auto whitespace-pre-wrap break-words rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs text-slate-800 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200;
+}
+
+.json-out {
+  @apply mt-3 max-h-96 overflow-auto rounded-2xl border border-slate-200 bg-slate-950 p-4 text-xs text-slate-100 dark:border-slate-700;
+}
