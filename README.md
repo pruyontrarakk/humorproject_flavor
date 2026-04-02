@@ -7,7 +7,7 @@ Next.js app for practicing the humor flavor assignment: CRUD on `humor_flavors` 
 ```bash
 npm install
 cp .env.example .env.local
-# Fill in Supabase keys + CAPTION_API_URL (see below)
+# Fill in Supabase keys (CAPTION_API_URL optional — see Caption API)
 npm run dev
 ```
 
@@ -18,24 +18,35 @@ npm run dev
 
 ## Caption API
 
-`POST /api/generate-captions` (same-origin, uses your session cookie) loads steps for a flavor and forwards this JSON to `CAPTION_API_URL`:
+`POST /api/generate-captions` (same-origin, admin session cookie) supports two upstream modes:
+
+### Default — Almost Crack’d pipeline (matches `humorproject` upload flow)
+
+If `CAPTION_API_URL` / `ALMOST_CRACKD_CAPTION_URL` are **unset**, the server POSTs to:
+
+`https://api.almostcrackd.ai/pipeline/generate-captions`
+
+with `Authorization: Bearer <Supabase access_token>` and body:
+
+```json
+{ "imageId": "<uuid from images.id>" }
+```
+
+### Custom — full flavor chain
+
+Set `CAPTION_API_URL` to any URL whose path does **not** end in `/pipeline/generate-captions`. The server loads steps from Supabase and POSTs:
 
 ```json
 {
   "image_url": "https://…",
   "humor_flavor_id": 123,
-  "steps": [
-    {
-      "humor_flavor_step_type_id": 1,
-      "description": null,
-      "llm_system_prompt": "…",
-      "llm_user_prompt": "…"
-    }
-  ]
+  "steps": [ … ]
 }
 ```
 
-Adjust `CAPTION_API_URL` / payload in `src/app/api/generate-captions/route.ts` if your course API expects a different shape.
+Optional `CAPTION_API_KEY` (or `ALMOST_CRACKD_API_KEY`) is sent as `Bearer` in this mode only.
+
+See `src/app/api/generate-captions/route.ts` for details.
 
 ## UI
 

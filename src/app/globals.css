@@ -69,7 +69,7 @@ body {
 }
 
 textarea.input {
-  @apply min-h-[80px] resize-y;
+  @apply min-h-[80px] max-w-full resize;
 }
 
 .section-title {
