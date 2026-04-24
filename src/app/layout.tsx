@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AuthNav } from "@/components/AuthNav";
-import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 export const metadata: Metadata = {
   title: "Humor Flavor Admin",
@@ -11,21 +10,23 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen bg-transparent text-slate-900 dark:text-slate-100">
+      <body className="min-h-screen bg-transparent text-black selection:bg-brand-primary selection:text-white">
         <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-4 py-6 sm:px-6 lg:px-8">
-          <header className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-            <div className="flex items-center gap-3">
-              <div>
-                <h1 className="text-2xl font-semibold tracking-tight text-brand-800 dark:text-brand-200 sm:text-3xl">
-                  Humor Flavor Admin
-                </h1>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
-                  Build and test prompt chains for humor flavor caption generation.
-                </p>
+          <header className="mb-10 flex items-center justify-between">
+            <div className="flex w-1/4 justify-start">
+              {/* RESERVED FOR NAVIGATION */}
+            </div>
+
+            <div className="flex flex-1 flex-col items-center text-center">
+              <h1 className="text-3xl font-black uppercase tracking-tighter text-black sm:text-5xl">
+                Flavor Admin
+              </h1>
+              <div className="mt-1 bg-black px-3 py-0.5 text-[0.6rem] font-bold tracking-[0.4em] text-white">
+                PROMPT CHAIN ORCHESTRATOR
               </div>
             </div>
-            <div className="flex flex-col items-end gap-3 sm:shrink-0">
-              <ThemeSwitcher />
+
+            <div className="flex w-1/4 justify-end text-right">
               <AuthNav />
             </div>
           </header>
