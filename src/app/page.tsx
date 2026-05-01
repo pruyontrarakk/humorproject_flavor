@@ -1,4 +1,4 @@
-import { PromptChainTool } from "@/components/PromptChainTool";
+import { FlavorHome } from "@/components/FlavorHome";
 
 export default function LandingPage() {
   return (
@@ -8,10 +8,9 @@ export default function LandingPage() {
           Prompt chain tool
         </h2>
         <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
-          Manage <code className="rounded bg-brand-50 px-1.5 py-0.5 text-xs text-brand-900 dark:bg-brand-900/30 dark:text-brand-100">humor_flavors</code>,{" "}
-          <code className="rounded bg-brand-50 px-1.5 py-0.5 text-xs text-brand-900 dark:bg-brand-900/30 dark:text-brand-100">humor_flavor_steps</code>, and{" "}
-          <code className="rounded bg-brand-50 px-1.5 py-0.5 text-xs text-brand-900 dark:bg-brand-900/30 dark:text-brand-100">humor_flavor_step_types</code>. Test caption
-          generation via{" "}
+          Pick a flavor to open its page, then manage{" "}
+          <code className="rounded bg-brand-50 px-1.5 py-0.5 text-xs text-brand-900 dark:bg-brand-900/30 dark:text-brand-100">humor_flavor_steps</code> and run caption
+          tests for that flavor only via{" "}
           <code className="rounded bg-brand-50 px-1.5 py-0.5 text-xs text-brand-900 dark:bg-brand-900/30 dark:text-brand-100">/api/generate-captions</code> (set{" "}
           <code className="rounded bg-brand-50 px-1.5 py-0.5 text-xs text-brand-900 dark:bg-brand-900/30 dark:text-brand-100">CAPTION_API_URL</code> in{" "}
           <code className="rounded bg-brand-50 px-1.5 py-0.5 text-xs text-brand-900 dark:bg-brand-900/30 dark:text-brand-100">.env.local</code>).
@@ -21,7 +20,7 @@ export default function LandingPage() {
           <code className="text-slate-700 dark:text-slate-300">profiles.is_matrix_admin</code>.
         </p>
       </section>
-      <PromptChainTool />
+      <FlavorHome />
     </div>
   );
 }
