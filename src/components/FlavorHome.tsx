@@ -96,6 +96,26 @@ export function FlavorHome() {
 
       <section className="card overflow-hidden">
         <div className="border-b-2 border-black bg-white px-4 py-3">
+          <h2 className="section-title">Create flavor</h2>
+        </div>
+        <div className="p-4 sm:p-5">
+          <form className="flex flex-wrap gap-2" onSubmit={handleCreateFlavor}>
+            <input
+              className="input min-w-0 flex-1"
+              value={newFlavorDesc}
+              onChange={e => setNewFlavorDesc(e.target.value)}
+              placeholder="e.g. Sarcastic sports captions"
+              autoComplete="off"
+            />
+            <button type="submit" disabled={busy} className="btn-primary shrink-0">
+              Create and open
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section className="card overflow-hidden">
+        <div className="border-b-2 border-black bg-white px-4 py-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <h2 className="section-title">Choose a flavor</h2>
             {!loading && flavors.length > 0 && (
@@ -142,7 +162,7 @@ export function FlavorHome() {
               );
             }
             return (
-              <ul className="grid gap-2 sm:grid-cols-2">
+              <ul className="grid gap-2 overflow-y-auto sm:grid-cols-2" style={{ maxHeight: "30rem" }}>
                 {filtered.map(f => {
                   const label = (f.description || f.slug || String(f.id)) as string;
                   return (
@@ -165,36 +185,6 @@ export function FlavorHome() {
         </div>
       </section>
 
-      <section className="card overflow-hidden">
-        <div className="border-b border-slate-200 bg-white/80 px-4 py-3 dark:border-slate-700 dark:bg-slate-950/50">
-          <h2 className="section-title">Create flavor</h2>
-        </div>
-        <div className="p-4 sm:p-5">
-          <form className="space-y-3" onSubmit={handleCreateFlavor}>
-            <label className="block">
-              <span className="mb-1 block text-xs font-medium text-slate-600 dark:text-slate-400">Description</span>
-              <input
-                className="input"
-                value={newFlavorDesc}
-                onChange={e => setNewFlavorDesc(e.target.value)}
-                placeholder="e.g. Sarcastic sports captions"
-              />
-            </label>
-            <label className="block">
-              <span className="mb-1 block text-xs font-medium text-slate-600 dark:text-slate-400">Slug (optional)</span>
-              <input
-                className="input"
-                value={newFlavorSlug}
-                onChange={e => setNewFlavorSlug(e.target.value)}
-                placeholder="auto-generated if empty"
-              />
-            </label>
-            <button type="submit" disabled={busy} className="btn-primary">
-              Create and open
-            </button>
-          </form>
-        </div>
-      </section>
     </div>
   );
 }

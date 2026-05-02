@@ -277,11 +277,27 @@ export function PromptChainTool({ flavorId }: { flavorId: string }) {
     router.push("/");
   }
 
-  function openDuplicateModal() {
+  async function openDuplicateModal() {
     if (!selectedFlavor) return;
     const base =
       (selectedFlavor.description || selectedFlavor.slug || `Flavor ${selectedFlavor.id}`).trim() || "Flavor";
-    setDuplicateFormDesc(`${base} (copy)`);
+
+    // Fetch all existing descriptions to find a unique name
+    const { data: existing } = await supabase
+      .from("humor_flavors")
+      .select("description");
+    const taken = new Set(
+      (existing ?? []).map((r: { description?: string | null }) => (r.description ?? "").trim().toLowerCase())
+    );
+
+    let candidate = `${base} (copy)`;
+    if (taken.has(candidate.toLowerCase())) {
+      let n = 2;
+      while (taken.has(`${base} (copy ${n})`.toLowerCase())) n++;
+      candidate = `${base} (copy ${n})`;
+    }
+
+    setDuplicateFormDesc(candidate);
     setDuplicateFormSlug("");
     setDuplicateModalOpen(true);
   }
@@ -315,7 +331,22 @@ export function PromptChainTool({ flavorId }: { flavorId: string }) {
       return;
     }
 
-    const newDescription = duplicateFormDesc.trim();
+    let newDescription = duplicateFormDesc.trim();
+
+    // Ensure the name is unique at submit time too
+    const { data: existingAtSubmit } = await supabase
+      .from("humor_flavors")
+      .select("description");
+    const takenAtSubmit = new Set(
+      (existingAtSubmit ?? []).map((r: { description?: string | null }) => (r.description ?? "").trim().toLowerCase())
+    );
+    if (takenAtSubmit.has(newDescription.toLowerCase())) {
+      const base = newDescription;
+      let n = 2;
+      while (takenAtSubmit.has(`${base} ${n}`.toLowerCase())) n++;
+      newDescription = `${base} ${n}`;
+    }
+
     const slug = duplicateFormSlug.trim() || slugFromFlavorDescription(newDescription);
 
     const { data: newFlavor, error: insertFlavorError } = await supabase
